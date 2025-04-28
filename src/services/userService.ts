@@ -24,7 +24,7 @@ userClient.interceptors.request.use(
 export const userService = {
   // Watchlist operations
   getWatchlist: async () => {
-    const response = await userClient.get('/user/watchlist');
+    const response = await userClient.get('/api/user/watchlist');
     // Log the actual response structure for debugging
     console.log("Backend watchlist response:", response);
     return response;
@@ -33,7 +33,7 @@ export const userService = {
   addToWatchlist: async (itemType, itemId) => {
     try {
       console.log(`Adding to watchlist: ${itemType} ${itemId}`);
-      const response = await userClient.post('/user/watchlist', { itemType, itemId });
+      const response = await userClient.post('/api/user/watchlist', { itemType, itemId });
       console.log("Add to watchlist response:", response);
       return response;
     } catch (error) {
@@ -45,7 +45,7 @@ export const userService = {
   removeFromWatchlist: async (itemType, itemId) => {
     try {
       console.log(`Removing from watchlist: ${itemType} ${itemId}`);
-      const response = await userClient.delete(`/user/watchlist/${itemType}/${itemId}`);
+      const response = await userClient.delete(`/api/user/watchlist/${itemType}/${itemId}`);
       console.log("Remove from watchlist response:", response);
       return response;
     } catch (error) {
@@ -56,7 +56,7 @@ export const userService = {
   
   // Watched items operations
   getWatchedItems: async () => {
-    const response = await userClient.get('/user/watched');
+    const response = await userClient.get('/api/user/watched');
     console.log("Backend watched items response:", response);
     return response;
   },
@@ -64,7 +64,7 @@ export const userService = {
   markAsWatched: async (itemType, itemId) => {
     try {
       console.log(`Marking as watched: ${itemType} ${itemId}`);
-      const response = await userClient.post('/user/watched', { itemType, itemId });
+      const response = await userClient.post('/api/user/watched', { itemType, itemId });
       console.log("Mark as watched response:", response);
       return response;
     } catch (error) {
@@ -76,7 +76,7 @@ export const userService = {
   removeFromWatched: async (itemType, itemId) => {
     try {
       console.log(`Removing from watched: ${itemType} ${itemId}`);
-      const response = await userClient.delete(`/user/watched/${itemType}/${itemId}`);
+      const response = await userClient.delete(`/api/user/watched/${itemType}/${itemId}`);
       console.log("Remove from watched response:", response);
       return response;
     } catch (error) {
@@ -87,7 +87,7 @@ export const userService = {
   
   // Rating operations
   getUserRatings: async () => {
-    const response = await userClient.get('/user/ratings');
+    const response = await userClient.get('/api/user/ratings');
     console.log("Backend user ratings response:", response);
     return response;
   },
@@ -95,7 +95,7 @@ export const userService = {
   rateItem: async (itemType, itemId, rating) => {
     try {
       console.log(`Rating item: ${itemType} ${itemId} with rating ${rating}`);
-      const response = await userClient.post('/user/ratings', { itemType, itemId, rating });
+      const response = await userClient.post('/api/user/ratings', { itemType, itemId, rating });
       console.log("Rate item response:", response);
       return response;
     } catch (error) {
