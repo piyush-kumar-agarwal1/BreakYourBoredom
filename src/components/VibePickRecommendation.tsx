@@ -898,11 +898,14 @@ const VibePickRecommendation = () => {
             </CardContent>
             <CardFooter className="flex justify-center pb-6 pt-2">
               <Button 
-                onClick={() => getRecommendations('initial')}
+                onClick={(e) => {
+                  e.preventDefault();
+                  getRecommendations('initial', 1);
+                }}
                 size="lg"
-                className="w-full sm:w-auto px-8 py-6 text-lg font-bold bg-gradient-to-r from-primary to-primary/80
+                className="w-full px-4 py-3 sm:w-auto sm:px-8 sm:py-6 text-base md:text-lg font-bold bg-gradient-to-r from-primary to-primary/80
                 hover:bg-primary/90 shadow-[0_0_15px_rgba(var(--primary),0.4)] hover:shadow-[0_0_25px_rgba(var(--primary),0.6)] 
-                transition-all"
+                transition-all tap-target"
               >
                 <div className="flex items-center justify-center gap-2">
                   <Sparkles className="h-5 w-5 animate-pulse" />
@@ -914,8 +917,8 @@ const VibePickRecommendation = () => {
         </div>
       ) : (
         <div className="space-y-6">
-          <div className="flex items-center justify-between">
-            <h2 className="text-2xl font-bold">Your Recommendations</h2>
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-0">
+            <h2 className="text-xl md:text-2xl font-bold">Your Recommendations</h2>
             <div className="flex space-x-2">
               <Button 
                 variant="outline" 
@@ -946,7 +949,7 @@ const VibePickRecommendation = () => {
             </div>
           ) : recommendations.length > 0 ? (
             <div className="space-y-8">
-              <MediaGrid items={recommendations} type="mixed" columns={surpriseMe ? 1 : 3} />
+              <MediaGrid items={recommendations} type="mixed" columns={surpriseMe ? 1 : {default: 2, sm: 2, md: 3}} />
               
               {/* Load More button - only show if there's more content and not in surprise me mode */}
               {hasMore && !surpriseMe && (

@@ -208,7 +208,7 @@ const EnhancedRecommendation = () => {
                 {/* Content Type Selection */}
                 <div>
                   <h3 className="font-medium mb-3">Type of Content</h3>
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 md:gap-4">
                     <div 
                       className={`border rounded-lg p-4 cursor-pointer transition-all ${
                         contentTypes.includes('movie') 
@@ -290,7 +290,7 @@ const EnhancedRecommendation = () => {
                 {/* Mood-Based Selection */}
                 <div>
                   <h3 className="font-medium mb-3">What mood are you in?</h3>
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                  <div className="grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-2">
                     {moods.map(mood => (
                       <div 
                         key={mood.label}
@@ -418,39 +418,20 @@ const EnhancedRecommendation = () => {
               <p className="text-muted-foreground">Finding the perfect content to break your boredom...</p>
             </div>
           ) : recommendations.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
               {recommendations.map((item, index) => (
                 <div 
                   key={`${item.id}-${index}`} 
-                  className="group relative h-[400px] perspective"
+                  className="group relative h-[350px] sm:h-[400px] perspective"
                 >
                   <div className="card-flip absolute inset-0 transform-style-3d transition-transform duration-700 w-full h-full preserve-3d group-hover:rotate-y-180">
-                    {/* Front of card */}
-                    <div className="front absolute inset-0 bg-card rounded-xl overflow-hidden shadow-lg transform-gpu backface-hidden">
-                      <div className="relative h-full">
-                        <img 
-                          src={item.coverImage} 
-                          alt={item.title}
-                          className="w-full h-full object-cover"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent"></div>
-                        <div className="absolute bottom-0 left-0 right-0 p-4">
-                          <h3 className="text-xl font-bold text-white">{item.title}</h3>
-                          <div className="flex items-center text-white/80 space-x-2 mt-1">
-                            <span>{item.year}</span>
-                            <span>•</span>
-                            <div className="flex items-center">
-                              <span className="text-yellow-400">★</span>
-                              <span className="ml-1">{item.rating.toFixed(1)}</span>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="absolute top-2 right-2">
-                          <Badge className="bg-primary/80">{getContentTypeLabel(item)}</Badge>
-                        </div>
+                    {/* Front of card - make content more readable on mobile */}
+                    <div className="absolute inset-0 backface-hidden">
+                      <div className="p-3 sm:p-4">
+                        <h3 className="text-base sm:text-lg font-semibold line-clamp-2">{item.title}</h3>
+                        {/* Other card content */}
                       </div>
                     </div>
-                    
                     {/* Back of card */}
                     <div className="back absolute inset-0 bg-card rounded-xl p-4 shadow-lg transform-gpu backface-hidden rotate-y-180 overflow-y-auto">
                       <div className="flex flex-col h-full">

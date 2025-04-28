@@ -84,4 +84,35 @@
   .rotate-y-180 {
     transform: rotateY(180deg);
   }
+  
+  /* Add a utility for better tap targets */
+  .tap-target {
+    @apply min-h-[48px] min-w-[48px];
+  }
+  
+  /* Mobile-specific text adjustments */
+  .mobile-text-adjust {
+    @apply text-sm sm:text-base;
+  }
+  
+  /* Safe area padding for notched phones */
+  .safe-padding {
+    @apply px-4 sm:px-6 md:px-8 pb-8 pt-4 md:pt-6;
+    padding-bottom: calc(2rem + env(safe-area-inset-bottom, 0));
+    padding-left: calc(1rem + env(safe-area-inset-left, 0));
+    padding-right: calc(1rem + env(safe-area-inset-right, 0));
+  }
+
+  /* Safe area paddings for modern mobile browsers */
+  .mobile-safe-area {
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  
+  /* Improved touch targets for mobile */
+  .touch-friendly {
+    min-height: 44px;
+    min-width: 44px;
+  }
 }
