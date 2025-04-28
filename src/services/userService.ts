@@ -4,7 +4,8 @@ const API_URL = import.meta.env.VITE_API_URL || 'https://byb-backend-1.onrender.
 
 const userClient = axios.create({
   baseURL: API_URL,
-  withCredentials: true
+  withCredentials: true,
+  timeout: 15000, // Increase timeout to 15 seconds for slower mobile connections
 });
 
 // Add auth token to all requests if available
@@ -14,6 +15,7 @@ userClient.interceptors.request.use(
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
+    console.log(`Making request to: ${config.baseURL}${config.url}`);
     return config;
   },
   (error) => {
