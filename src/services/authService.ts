@@ -24,7 +24,7 @@ authClient.interceptors.request.use(
 export const authService = {
   register: async (name: string, email: string, password: string) => {
     try {
-      const response = await authClient.post('/auth/register', {
+      const response = await authClient.post('/register', {
         name,
         email,
         password,
@@ -43,7 +43,7 @@ export const authService = {
   
   login: async (email: string, password: string) => {
     try {
-      const response = await authClient.post('/auth/login', {
+      const response = await authClient.post('/login', {
         email,
         password,
       });
@@ -61,12 +61,12 @@ export const authService = {
   
   logout: async () => {
     localStorage.removeItem('authToken');
-    return await authClient.post('/auth/logout');
+    return await authClient.post('/logout');
   },
   
   getCurrentUser: async () => {
     try {
-      return await authClient.get('/auth/me');
+      return await authClient.get('/me');
     } catch (error) {
       // If 401, it means user is not logged in, which is expected
       if (axios.isAxiosError(error) && error.response?.status === 401) {
