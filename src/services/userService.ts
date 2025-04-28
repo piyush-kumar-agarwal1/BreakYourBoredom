@@ -1,24 +1,24 @@
 import axios from 'axios';
 
-// Create a client with the correct base URL and authentication
-export const userClient = axios.create({
-  baseURL: import.meta.env.VITE_API_URL,
-  withCredentials: true,
-  headers: {
-    'Content-Type': 'application/json',
-  }
+const API_URL = import.meta.env.VITE_API_URL || 'https://byb-backend-1.onrender.com';
+
+const userClient = axios.create({
+  baseURL: API_URL,
+  withCredentials: true
 });
 
-// Add an interceptor to include the authentication token with every request
+// Add auth token to all requests if available
 userClient.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+    const token = localStorage.getItem('authToken');
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
   },
-  (error) => Promise.reject(error)
+  (error) => {
+    return Promise.reject(error);
+  }
 );
 
 export const userService = {
